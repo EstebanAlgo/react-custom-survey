@@ -93,12 +93,18 @@
         {
           "type": "text",
           "name": "injury_date",
+          "visible": false,
           "maxWidth": "250px",
           "title": "When did the injury occur?",
           "hideNumber": true,
-          "isRequired": true
-          
-         
+          "isRequired": true,
+          "inputType": "date",
+          "max": "2999-12-31"
+        },
+        {
+          "type": "html",
+          "name": "html_injury_date",
+          "visible": false
         }
       ],
       "title": "Select you claim:",
@@ -322,7 +328,7 @@
           "type": "html",
           "name": "aviso4",
           "visibleIf": "{workers_compensation_insurance} = 'I don´t Know'",
-          "html": "<a href=”http://www.ewccv.com/cvs” target=\"_blank\">Check here, Workers' CompCheck</a>\n\t\t\t\t"
+          "html": "<a href=”www.ewccv.com/cvs” target=\"_blank\">Check here, Workers' CompCheck</a>\n\t\t\t\t"
         },
         {
           "type": "dropdown",

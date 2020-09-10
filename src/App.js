@@ -15,7 +15,6 @@ import form from "./jsonFormInjured.json";
 import * as Survey from "survey-react";
 import "react-datepicker/dist/react-datepicker.css";
 
-
 //Definimos la fecha actual para guardar en el State
 let date = new Date();
 let dd = date.getDate();
@@ -122,6 +121,22 @@ const setDefaultDate = () => {
   );
   respective_duty_end_date.min = storeDate;
   respective_duty_end_date.max = fecha;
+  //Mostramos al usuario la fecha de la lesión
+  let message = survey.getQuestionByName("html_injury_date");
+  let cadFecha = storeDate;
+  cadFecha =
+    cadFecha.substr(8, 2) +
+    "/" +
+    cadFecha.substr(5, 2) +
+    "/" +
+    cadFecha.substr(0, 4);
+  message.html =
+    "<div style='color:white;background:#476092;'><h3>Tu accidente ocurrió el: " +
+    cadFecha +
+    "<h3></div>";
+  let typeCvr = survey.getQuestionByName("type_of_cvr");
+  if (typeCvr.value) message.visible = true;
+  //
 };
 
 class App extends Component {
@@ -129,6 +144,7 @@ class App extends Component {
     super();
     this.state = {
       modalDateInjury: false,
+      htmlDate: false,
       injuryDate: fecha,
       defaultInjuryDate: fecha,
     };
@@ -143,7 +159,7 @@ class App extends Component {
   //********ASIGNACIÓN DE LÍMITES PARA LOS INPUTS DE TODO EL FORMS al cambiar o asignar la Fecha de la lesión***********
   setDateInjury = () => {
     this.setState({
-      injuryDate:this.dateModalInjury.current.value
+      injuryDate: this.dateModalInjury.current.value,
     });
     //Establecemos la fecha de la lesión
     let injury_date = survey.getQuestionByName("injury_date");
@@ -177,7 +193,22 @@ class App extends Component {
       "respective_duty_end_date"
     );
     respective_duty_end_date.min = this.dateModalInjury.current.value;
+
+    let message = survey.getQuestionByName("html_injury_date");
+    let cadFecha = this.dateModalInjury.current.value;
+    cadFecha =
+      cadFecha.substr(8, 2) +
+      "/" +
+      cadFecha.substr(5, 2) +
+      "/" +
+      cadFecha.substr(0, 4);
+    message.html =
+      "<div style='color:white;background:#476092;'><h3>Tu accidente ocurrió el: " +
+      cadFecha +
+      "<h3></div>";
+    message.visible = true;
   };
+
 
   render() {
     //Condición para el despliegue del modal de "Type of CVR"
@@ -194,6 +225,21 @@ class App extends Component {
     disability.onValueChanged = () => {
       if (disability.value) temporary_disability_end_date.value = fecha;
     };
+    let typeCvr = document.getElementsByName("type_of_cvr");
+    let typeCvr2=survey.getQuestionByName("type_of_cvr");
+    typeCvr2.onClick=()=>{
+      alert("entres?");
+      this.setState({
+        modalDateInjury:!this.state.modalDateInjury
+      });
+    }
+    typeCvr.onclick=()=>{
+      alert("entres?");
+      this.setState({
+        modalDateInjury:!this.state.modalDateInjury
+      });
+    }
+    
 
     return (
       <Container>
@@ -217,9 +263,7 @@ class App extends Component {
           </Modal.Header>
           <Modal.Body>
             <FormGroup>
-              <FormLabel>
-                Por favor ingrese la fecha en la cual ocurrió la lesión
-              </FormLabel>
+              <FormLabel>When did the injury occur?</FormLabel>
               <FormControl type="date" ref={this.dateModalInjury} />
             </FormGroup>
           </Modal.Body>
