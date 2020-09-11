@@ -5,6 +5,7 @@ import {
   Row,
   Col,
   Modal,
+  Form,
   FormControl,
   FormLabel,
   FormGroup,
@@ -32,22 +33,27 @@ themeColors["$header-color"] = "#B2B4B6 ";
 themeColors["$header-background-color"] = "#E6F2FA";
 themeColors["$body-container-background-color"] = "#f8f8f8";
 
-var myCss = {
-  navigationButton: "button btn-sm mt-3 ",
+let myCss = {
+  navigationButton: "btn btn-sm mt-3 ",
   imagepicker: {
-    root: "h6 text-dark text-center",
-    image: "img-fluid",
-    itemChecked: "text-light checked bold",
+    root: "h6 text-center text-muted",
+    itemChecked: "text-light checked text-bold ",
+  },
+  paneldynamic: {
+    buttonAdd: "sv-paneldynamic__add-btn btn btn-sm",
+    root: "sv_panel_dynamic  m-5",
+    progress: "sv-progress bg-inverse",
+    buttonRemove: "btn btn-danger bg-danger btn-sm",
+    buttonAdd: "sv-paneldynamic__add-btn btn  bg-success btn-sm",
   },
 };
 
 Survey.StylesManager.applyTheme();
-var survey = new Survey.Model(form);
+let survey = new Survey.Model(form);
 
-var q = survey.getQuestionByName("type_of_cvr");
+let q = survey.getQuestionByName("injuries");
 let cssTypeCvr = q.cssClasses;
 console.log(cssTypeCvr);
-survey.updateQuestionCssClasses();
 
 //GUARDA EL PROGRESO EN EL STATTE
 var storageName = "saveSurvey";
@@ -124,6 +130,7 @@ const setDefaultDate = () => {
   //Mostramos al usuario la fecha de la lesión
   let message = survey.getQuestionByName("html_injury_date");
   let cadFecha = storeDate;
+  if (cadFecha == null) cadFecha = fecha;
   cadFecha =
     cadFecha.substr(8, 2) +
     "/" +
@@ -147,13 +154,21 @@ class App extends Component {
       htmlDate: false,
       injuryDate: fecha,
       defaultInjuryDate: fecha,
+      modalPay: false,
     };
     this.dateModalInjury = React.createRef();
+    this.resultado = React.createRef();
   }
-  //***************************************** SHOW/HIDE MODEL **************************************************
+  //***************************************** SHOW/HIDE MODEL DATE INJURY**************************************************
   handleModal = () => {
     this.setState({
       modalDateInjury: !this.state.modalDateInjury,
+    });
+  };
+  //***************************************** SHOW/HIDE MODAL Pay**************************************************
+  handleModalPay = () => {
+    this.setState({
+      modalPay: !this.state.modalPay,
     });
   };
   //********ASIGNACIÓN DE LÍMITES PARA LOS INPUTS DE TODO EL FORMS al cambiar o asignar la Fecha de la lesión***********
@@ -196,6 +211,7 @@ class App extends Component {
 
     let message = survey.getQuestionByName("html_injury_date");
     let cadFecha = this.dateModalInjury.current.value;
+
     cadFecha =
       cadFecha.substr(8, 2) +
       "/" +
@@ -208,7 +224,6 @@ class App extends Component {
       "<h3></div>";
     message.visible = true;
   };
-
 
   render() {
     //Condición para el despliegue del modal de "Type of CVR"
@@ -226,32 +241,44 @@ class App extends Component {
       if (disability.value) temporary_disability_end_date.value = fecha;
     };
     let typeCvr = document.getElementsByName("type_of_cvr");
-    let typeCvr2=survey.getQuestionByName("type_of_cvr");
-    typeCvr2.onClick=()=>{
+    let typeCvr2 = survey.getQuestionByName("type_of_cvr");
+    typeCvr2.onClick = () => {
       alert("entres?");
       this.setState({
-        modalDateInjury:!this.state.modalDateInjury
+        modalDateInjury: !this.state.modalDateInjury,
       });
-    }
-    typeCvr.onclick=()=>{
+    };
+    typeCvr.onclick = () => {
       alert("entres?");
       this.setState({
-        modalDateInjury:!this.state.modalDateInjury
+        modalDateInjury: !this.state.modalDateInjury,
       });
-    }
-    
+    };
 
     return (
       <Container>
         <Row>
-          <Col>
+          <Col md={12}>
             <Survey.Survey
               model={survey}
               onAfterRenderSurvey={() => setDefaultDate()}
               css={myCss}
+              onComplete={() => this.handleModalPay()}
             />
           </Col>
         </Row>
+        <Row>
+            <Col>
+              <Form.Group controlId="exampleForm.ControlTextarea1">
+                <Form.Label>Resultado</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows="10"
+                  value={JSON.stringify(survey.data)}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
         <Modal
           show={this.state.modalDateInjury}
           onHide={() => this.handleModal()}
@@ -275,6 +302,37 @@ class App extends Component {
               variant="primary"
               onClick={() => {
                 this.handleModal();
+                this.setDateInjury();
+              }}
+            >
+              Save Date
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal
+          show={this.state.modalPay}
+          onHide={() => this.handleModalPay()}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>PAY METHOD</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <FormGroup>
+              <FormLabel>Ingrese su método de pago</FormLabel>
+              <FormControl type="date" ref={this.dateModalInjury} />
+            </FormGroup>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={() => this.handleModalPay()}>
+              Close
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                this.handleModalPay();
                 this.setDateInjury();
               }}
             >
