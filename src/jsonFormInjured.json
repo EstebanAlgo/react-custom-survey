@@ -87,7 +87,9 @@
               "imageLink": "data:image/jpeg;base64,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"
             }
           ],
-          "colCount": 3,
+          "colCount": 5,
+          "imageHeight": 110,
+          "imageWidth": 150,
           "showLabel": true
         },
         {
@@ -716,7 +718,9 @@
                   "imageLink": "http://bananashernandez.com/assets/cvr/about-your-injuries/Lower%20Extremities/lower.png"
                 }
               ],
-              
+              "colCount": 4,
+              "imageHeight": 110,
+              "imageWidth": 160,
               "showLabel": true
             },
             {
@@ -737,6 +741,8 @@
                 }
               ],
               "colCount": 2,
+              "imageHeight": 120,
+              "imageWidth": 140,
               "showLabel": true
             },
             {
@@ -765,7 +771,8 @@
                 }
               ],
               "colCount": 4,
-              "imageWidth": 150,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true
             },
             {
@@ -1178,6 +1185,8 @@
                 }
               ],
               "colCount": 2,
+              "imageHeight": 120,
+              "imageWidth": 140,
               "showLabel": true
             },
             {
@@ -1337,6 +1346,8 @@
                 }
               ],
               "colCount": 5,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -1512,6 +1523,8 @@
                 }
               ],
               "colCount": 5,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -1623,6 +1636,8 @@
                 }
               ],
               "colCount": 5,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -1799,6 +1814,8 @@
                 }
               ],
               "colCount": 5,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -1828,6 +1845,8 @@
                 }
               ],
               "colCount": 2,
+              "imageHeight": 120,
+              "imageWidth": 140,
               "showLabel": true
             },
             {
@@ -1848,6 +1867,8 @@
                 }
               ],
               "colCount": 2,
+              "imageHeight": 120,
+              "imageWidth": 140,
               "showLabel": true
             },
             {
@@ -1991,6 +2012,8 @@
                 }
               ],
               "colCount": 3,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -2151,6 +2174,8 @@
                 }
               ],
               "colCount": 3,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -2247,6 +2272,8 @@
                 }
               ],
               "colCount": 3,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -2254,6 +2281,7 @@
               "type": "boolean",
               "name": "trunk_other_current_symptoms_for_more_than_6_months",
               "visibleIf": "{panel.injury_information} = 'TRUNK' and {panel.type_injury_TRUNK} notempty and {panel.body_part_SPINE} = 'Other' and {panel.trunk_other_current_symptom} notempty",
+              "minWidth": "200px",
               "startWithNewLine": false,
               "title": "Have you had this symptoms for more than 6 months?",
               "hideNumber": true,
@@ -2417,6 +2445,8 @@
                 }
               ],
               "colCount": 3,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -2454,6 +2484,8 @@
                 }
               ],
               "colCount": 4,
+              "imageHeight": 120,
+              "imageWidth": 140,
               "showLabel": true
             },
             {
@@ -2556,6 +2588,8 @@
                 }
               ],
               "colCount": 4,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -2735,6 +2769,8 @@
                 }
               ],
               "colCount": 4,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -2781,6 +2817,8 @@
                 }
               ],
               "colCount": 3,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true,
               "multiSelect": true
             },
@@ -2919,6 +2957,8 @@
                 }
               ],
               "colCount": 3,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true
             },
             {
@@ -2943,6 +2983,8 @@
                 }
               ],
               "colCount": 3,
+              "imageHeight": 120,
+              "imageWidth": 140,
               "showLabel": true
             },
             {
@@ -2979,6 +3021,8 @@
                 }
               ],
               "colCount": 3,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true
             },
             {
@@ -3254,6 +3298,8 @@
                 }
               ],
               "colCount": 3,
+              "imageHeight": 110,
+              "imageWidth": 130,
               "showLabel": true
             }
           ],
