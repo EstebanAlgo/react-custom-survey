@@ -65,6 +65,14 @@ let myCss = {
 Survey.StylesManager.applyTheme();
 let survey = new Survey.Model(form);
 
+//alert("valor: " + jsonResult[i] + " Posición:" + positions[i]);
+
+let medicalExpenses=survey.getQuestionByName("injuries");
+console.log(medicalExpenses.getDisplayValue());
+
+
+
+
 //GUARDA EL PROGRESO EN EL STATTE
 var storageName = "saveSurvey";
 var timerId = 0;
@@ -185,18 +193,26 @@ class App extends Component {
   //***************************************** Gastos médicos pendientes**************************************************
 
   medicalExpenses = (injuries) => {
-   let n=injuries.length;
-   var bar= new Array();
-   for (let i = 1; i <= n; i++) {
-    bar[i]=""+i+"";
-   }
-//alert(JSON.stringify(bar));
-  //alert(JSON.stringify(injuries[0].injury_information));
+    let n = injuries.length;
+    var bar = new Array();
+    var positions = new Array();
+    let nPositions = 0;
+
+    for (let i = 0; i < n; i++) {
+      
+      if (injuries[i].medical_expenses == true) {
+        positions[nPositions++] = i;
+        bar[i] = "" + nPositions + "";
+      }
+    }
+    //injuries[i].medical_expenses=true;
+     // alert(JSON.stringify(injuries[i].medical_expenses));
+    //alert(JSON.stringify(injuries[positions[0]].injury_information));
     Swal.mixin({
       confirmButtonText: "Next &rarr;",
       progressSteps: bar,
       input: "number",
-      allowOutsideClick:false
+      allowOutsideClick: false,
     })
       .queue([
         {
@@ -204,33 +220,47 @@ class App extends Component {
           imageWidth: 400,
           imageHeight: 200,
           imageAlt: "dvv",
-          title: injuries[0].injury_information,
+          title: injuries[positions[0]].injury_information,
           text: "Tienes gastos médicos pendientes para ésta lesión?",
         },
       ])
       .then((result) => {
         if (result.value) {
           const answers = JSON.stringify(result.value);
+          const jsonResult = JSON.parse(answers);
+          const positionsSurvey = JSON.stringify(positions);
+
+          for (let i = 0; i < positions.length; i++) {
+            
+            injuries[positions[i]].medical_expenses_count=jsonResult[i];
+            //alert("valor: " + jsonResult[i] + " Posición:" + positions[i]);
+            /*if(medicalExpenses)alert(JSON.stringify(medicalExpenses));
+            else alert("No la encontramos")*/
+            
+            alert(JSON.stringify(injuries[positions[i]].medical_expenses_count.value));
+          }
           Swal.fire({
             title: "All done!",
             html: `
                   Your answers:
                   <pre><code>${answers}</code></pre>
+                  <pre><code>${positionsSurvey}</code></pre>
                 `,
             confirmButtonText: "Lovely!",
           });
         }
       });
-    for (let index = 1; index < n; index++) {
+    for (let index = 1; index < positions.length; index++) {
       Swal.insertQueueStep({
         imageUrl: "https://unsplash.it/400/200",
         imageWidth: 400,
         imageHeight: 200,
         imageAlt: "dvv",
-        title: injuries[index].injury_information,
+        title: injuries[positions[index]].injury_information,
         text: "Tienes gastos médicos pendientes para ésta lesión?",
       });
     }
+    
   };
 
   //********ASIGNACIÓN DE LÍMITES PARA LOS INPUTS DE TODO EL FORMS al cambiar o asignar la Fecha de la lesión***********
@@ -289,7 +319,6 @@ class App extends Component {
   };
 
   render() {
-  
     //Condición para el despliegue del modal de "Type of CVR"
     var type_cvr = survey.getQuestionByName("type_of_cvr");
     if (type_cvr)
@@ -331,6 +360,12 @@ class App extends Component {
                 this.medicalExpenses(survey.data.injuries);
               }}
             />
+            
+<div id="modal"> 
+
+</div>
+ 
+<a href="https://github.com/marcelodolza/iziModal" class="trigger">Modal</a>
           </Col>
         </Row>
         <Row>

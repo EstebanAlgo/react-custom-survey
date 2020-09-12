@@ -3301,6 +3301,25 @@
               "imageHeight": 110,
               "imageWidth": 130,
               "showLabel": true
+            },
+            {
+              "type": "boolean",
+              "name": "medical_expenses",
+              "visibleIf": "{panel.injury_information} notempty",
+              "title": "Pending medical expenses",
+              "hideNumber": true,
+              "isRequired": true
+            },
+            {
+              "type": "text",
+              "name": "medical_count",
+              "visibleIf": "{panel.medical_expenses} = true",
+              "startWithNewLine": false,
+              "title": "Gastos Médicos Pendientes",
+              "hideNumber": true,
+              "readOnly": true,
+              "inputType": "number",
+              "size": 12
             }
           ],
           "templateTitle": "Information about ",
